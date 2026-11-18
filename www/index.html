@@ -1,90 +1,173 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl"><head><meta charset="utf-8">
+<html lang="de"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>باشگاه من</title>
+<title>Mein Gym</title>
 <style>
 :root{--bg:#101826;--s:#19243a;--s2:#223150;--ac:#ffb703;--tx:#eef2f7;--mu:#8fa0ba;--ok:#5fd0a0}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.7 Tahoma,"Segoe UI",sans-serif;padding:env(safe-area-inset-top) 0 calc(64px + env(safe-area-inset-bottom))}
-h1,h2,h3{margin:.4em 0}h1{font-size:22px}h2{font-size:18px}h3{font-size:16px;color:var(--ac)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.7 Tahoma,"Segoe UI",system-ui,sans-serif;padding:env(safe-area-inset-top) 0 calc(66px + env(safe-area-inset-bottom))}
+h1{font-size:22px;margin:.4em 0}h2{font-size:18px;margin:.4em 0}h3{font-size:16px;color:var(--ac);margin:.4em 0}
 main{padding:12px 14px;max-width:640px;margin:auto}
 nav{position:fixed;bottom:0;inset-inline:0;display:flex;background:var(--s);padding-bottom:env(safe-area-inset-bottom);border-top:1px solid var(--s2)}
-nav button{flex:1;background:none;border:0;color:var(--mu);padding:10px 2px;font:inherit;font-size:12px}
-nav button.on{color:var(--ac);font-weight:700}
-input,select,button.b{font:inherit;color:var(--tx);background:var(--s);border:1px solid var(--s2);border-radius:10px;padding:10px;width:100%}
-button.b{background:var(--ac);color:#101826;font-weight:700;border:0;margin-top:8px}
-button.g{background:var(--s2);color:var(--tx)}
+nav button{flex:1;background:none;border:0;color:var(--mu);padding:8px 2px;font:inherit;font-size:12px}
+nav button b{display:block;font-size:22px;line-height:1.2}nav button.on{color:var(--ac);font-weight:700}
+input{font:inherit;color:var(--tx);background:var(--s);border:1px solid var(--s2);border-radius:10px;padding:10px;width:100%}
+.b{font:inherit;background:var(--ac);color:#101826;font-weight:700;border:0;border-radius:10px;padding:12px;width:100%;margin-top:10px}
+.b.g{background:var(--s2);color:var(--tx)}
 .row{display:flex;gap:8px}.row>*{flex:1}
 label{display:block;font-size:13px;color:var(--mu);margin:8px 0 2px}
 .card{background:var(--s);border-radius:14px;padding:12px;margin:10px 0}
 .ex{display:flex;gap:10px;align-items:center;background:var(--s);border-radius:12px;padding:8px;margin:8px 0}
-.ex img{width:64px;height:64px;border-radius:8px;object-fit:cover;background:var(--s2)}
-.ex b{display:block;direction:ltr;text-align:left;font-size:14px}.ex small{color:var(--mu)}
-.chips{display:flex;gap:6px;overflow-x:auto;padding:4px 0}
-.chips span{white-space:nowrap;background:var(--s);padding:4px 12px;border-radius:99px;font-size:13px}
-.chips span.on{background:var(--ac);color:#101826}
-.hero{width:100%;aspect-ratio:1;object-fit:contain;background:#fff;border-radius:12px}
-.big{font-size:44px;text-align:center;color:var(--ac);font-variant-numeric:tabular-nums}
-.note{font-size:12px;color:var(--mu)}
-ol{padding-inline-start:20px;direction:ltr;text-align:left;font-size:14px}
-canvas{width:100%;height:160px}
-</style></head><body><main id="app"></main>
-<nav id="nav"></nav>
+.ex img{width:60px;height:60px;border-radius:8px;object-fit:cover;background:#fff}
+.ex .t{flex:1}.ex b{display:block;direction:ltr;text-align:start;font-size:14px}.ex small{color:var(--mu)}
+.ck{width:30px;height:30px;border-radius:50%;border:2px solid var(--mu);background:none;color:#101826;font-size:16px}.ck.on{background:var(--ok);border-color:var(--ok)}
+.goal{display:flex;gap:8px;background:var(--s);border:2px solid var(--s);border-radius:14px;padding:8px;margin:10px 0;align-items:center}
+.goal.on{border-color:var(--ac)}.goal .im{display:flex;gap:2px}.goal img{width:64px;height:64px;object-fit:cover;background:#fff;border-radius:6px}
+.goal small{color:var(--mu);display:block;line-height:1.4}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}.pills span{background:var(--s);padding:6px 14px;border-radius:99px;font-size:14px}.pills span.on{background:var(--ac);color:#101826;font-weight:700}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.cal i{font-style:normal;color:var(--mu);font-size:12px}
+.cal div{aspect-ratio:1;border-radius:10px;background:var(--s);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:14px}
+.cal div.p{border:1.5px dashed var(--ac)}.cal div.d{background:var(--ok);color:#101826;font-weight:700;border:0}
+.cal div.t{outline:2px solid var(--tx)}.cal div.s{background:var(--ac);color:#101826;border:0}
+.cal div u{font-size:10px;text-decoration:none}
+.hero{width:48%;aspect-ratio:1;object-fit:cover;background:#fff;border-radius:12px}
+.note{font-size:12px;color:var(--mu)}.hd{display:flex;justify-content:space-between;align-items:center}
+.hd button{background:var(--s);border:0;color:var(--tx);border-radius:10px;padding:6px 14px;font-size:18px}
+.ld p{opacity:0;animation:f .5s forwards}@keyframes f{to{opacity:1}}
+.tag{background:var(--ac);color:#101826;border-radius:99px;padding:0 8px;font-size:11px;font-weight:700}
+</style></head><body><main id="app"></main><nav id="nav"></nav>
 <script src="data.js"></script>
 <script>
-const FA={chest:'سینه',shoulders:'سرشانه',biceps:'جلو بازو',triceps:'پشت بازو',lats:'زیربغل',quadriceps:'جلو ران',hamstrings:'پشت ران',glutes:'باسن',calves:'ساق',abdominals:'شکم','middle back':'وسط کمر','lower back':'پایین کمر',forearms:'ساعد',traps:'تراپز',neck:'گردن',adductors:'داخل ران',abductors:'خارج ران'};
-const EQ={barbell:'هالتر',dumbbell:'دمبل',machine:'دستگاه',cable:'کابل','body only':'وزن بدن',kettlebells:'کتل‌بل',bands:'کش','e-z curl bar':'هالتر ز','medicine ball':'توپ مدیسین','exercise ball':'توپ ورزش','foam roll':'فوم رولر',other:'سایر'};
-const LV={beginner:1,intermediate:2,expert:3};
+const T={de:{
+next:'Weiter',back:'Zurück',hi:'Willkommen! Wir bauen deinen Trainingsplan.',lang:'Sprache',s1:'Über dich',sex:'Geschlecht',m:'Männlich',f:'Weiblich',age:'Alter',w:'Gewicht (kg)',h:'Größe (cm)',
+s3:'Was ist dein Ziel?',s4:'Dein Level',l1:'Anfänger',l2:'Fortgeschritten',l3:'Profi',where:'Trainingsort',gym:'Fitnessstudio',home:'Zuhause (Kurzhanteln, Körpergewicht)',
+s5:'An welchen Tagen trainierst du?',dh:'Empfehlung: 3 bis 5 Tage, damit sich dein Körper erholen kann.',build:'Plan erstellen',
+c1:'Körperdaten werden analysiert …',c2:'Ziel und Erfahrung werden abgeglichen …',c3:'Übungen werden aus 876 Bewegungen ausgewählt …',c4:'Dein Plan ist fertig!',start:'Los geht’s',
+cal:'Kalender',sup:'Supplements',me:'Profil',rest:'Ruhetag. Erholung gehört zum Training.',all:'Alle',rec:'Für dich',
+bmi:'BMI',kcal:'Kalorien pro Tag',prot:'Protein pro Tag',redo:'Neuen Plan erstellen',reps:'Sätze × Wiederholungen',days:'Tage',
+goalname:{mass:'Muskelaufbau',str:'Kraft',body:'Bodybuilding',cut:'Fettabbau',fit:'Fitness'},
+gd:{mass:'Mehr Muskelmasse mit Grundübungen. Mittlere Wiederholungen, kleiner Kalorienüberschuss.',str:'Maximalkraft mit schweren Gewichten und wenigen Wiederholungen. Lange Pausen.',body:'Muskelform und Details. Viele Isolationsübungen, mehr Volumen pro Muskel.',cut:'Fett verlieren, Muskeln behalten. Mehr Wiederholungen, Kaloriendefizit.',fit:'Gesund, beweglich und ausgewogen. Ganzkörper ohne Extreme.'},
+reptxt:{mass:'3–4 × 8–12',str:'4–5 × 3–6',body:'4 × 10–15',cut:'3 × 12–15',fit:'3 × 10–15'},
+sp:{full:'Ganzkörper',a:'Ganzkörper A',b:'Ganzkörper B',c:'Ganzkörper C',up1:'Oberkörper 1',lo1:'Unterkörper 1',up2:'Oberkörper 2',lo2:'Unterkörper 2',push:'Drücken',pull:'Ziehen',legs:'Beine',up:'Oberkörper',lo:'Unterkörper'},
+warn:'Allgemeine Information, keine ärztliche Beratung. Bei Krankheiten, Schwangerschaft oder Medikamenteneinnahme zuerst mit einer Ärztin oder einem Arzt sprechen. Nur Produkte aus seriösen Quellen kaufen.',
+cats:{prot:'Protein',perf:'Leistung',vit:'Vitamine und Mineralstoffe',joint:'Gelenke',rec:'Erholung und Schlaf',fat:'Fettabbau',med:'Medikamente'}},
+fa:{next:'ادامه',back:'بازگشت',hi:'خوش اومدی! برنامه تمرینی‌ات رو می‌سازیم.',lang:'زبان',s1:'درباره‌ی تو',sex:'جنسیت',m:'مرد',f:'زن',age:'سن',w:'وزن (کیلو)',h:'قد (سانتی‌متر)',
+s3:'هدفت چیه؟',s4:'سطح تو',l1:'مبتدی',l2:'متوسط',l3:'حرفه‌ای',where:'محل تمرین',gym:'باشگاه',home:'خانه (دمبل و وزن بدن)',
+s5:'کدوم روزها تمرین می‌کنی؟',dh:'پیشنهاد: ۳ تا ۵ روز در هفته تا بدنت فرصت ریکاوری داشته باشه.',build:'ساخت برنامه',
+c1:'در حال تحلیل اطلاعات بدنی …',c2:'در حال تطبیق هدف و سطح …',c3:'انتخاب حرکت‌ها از بین ۸۷۶ حرکت …',c4:'برنامه‌ات آماده‌ست!',start:'شروع',
+cal:'تقویم',sup:'مکمل‌ها',me:'پروفایل',rest:'روز استراحت. ریکاوری هم بخشی از تمرینه.',all:'همه',rec:'مناسب تو',
+bmi:'BMI',kcal:'کالری روزانه',prot:'پروتئین روزانه',redo:'ساخت برنامه‌ی جدید',reps:'ست × تکرار',days:'روزها',
+goalname:{mass:'حجم',str:'قدرت',body:'بدنسازی',cut:'چربی‌سوزی',fit:'تناسب اندام'},
+gd:{mass:'افزایش حجم عضله با حرکات پایه. تکرار متوسط و کمی اضافه کالری.',str:'حداکثر قدرت با وزنه‌ی سنگین و تکرار کم. استراحت طولانی.',body:'فرم و جزئیات عضلات. حرکات ایزوله‌ی بیشتر و حجم تمرین بالاتر.',cut:'کم کردن چربی و حفظ عضله. تکرار بیشتر و کسری کالری.',fit:'سالم، منعطف و متعادل. تمرین کل بدن بدون افراط.'},
+reptxt:{mass:'۳-۴ × ۸-۱۲',str:'۴-۵ × ۳-۶',body:'۴ × ۱۰-۱۵',cut:'۳ × ۱۲-۱۵',fit:'۳ × ۱۰-۱۵'},
+sp:{full:'کل بدن',a:'کل بدن A',b:'کل بدن B',c:'کل بدن C',up1:'بالاتنه ۱',lo1:'پایین‌تنه ۱',up2:'بالاتنه ۲',lo2:'پایین‌تنه ۲',push:'پرس (فشاری)',pull:'کشش',legs:'پا',up:'بالاتنه',lo:'پایین‌تنه'},
+warn:'اطلاعات عمومی است، نه مشاوره‌ی پزشکی. با بیماری، بارداری یا مصرف دارو اول با پزشک مشورت کن. مکمل را فقط از منبع معتبر بخر.',
+cats:{prot:'پروتئین',perf:'عملکرد',vit:'ویتامین و مواد معدنی',joint:'مفاصل',rec:'ریکاوری و خواب',fat:'چربی‌سوزی',med:'دارو'}}};
+const MU={de:{chest:'Brust',shoulders:'Schultern',biceps:'Bizeps',triceps:'Trizeps',lats:'Latissimus',quadriceps:'Quadrizeps',hamstrings:'Beinbeuger',glutes:'Gesäß',calves:'Waden',abdominals:'Bauch','middle back':'Mittlerer Rücken','lower back':'Unterer Rücken',forearms:'Unterarme',traps:'Trapez',neck:'Nacken',adductors:'Adduktoren',abductors:'Abduktoren'},
+fa:{chest:'سینه',shoulders:'سرشانه',biceps:'جلو بازو',triceps:'پشت بازو',lats:'زیربغل',quadriceps:'جلو ران',hamstrings:'پشت ران',glutes:'باسن',calves:'ساق',abdominals:'شکم','middle back':'وسط کمر','lower back':'پایین کمر',forearms:'ساعد',traps:'تراپز',neck:'گردن',adductors:'داخل ران',abductors:'خارج ران'}};
+const EQ={de:{barbell:'Langhantel',dumbbell:'Kurzhantel',machine:'Maschine',cable:'Kabelzug','body only':'Körpergewicht',kettlebells:'Kettlebell',bands:'Band','e-z curl bar':'SZ-Stange'},
+fa:{barbell:'هالتر',dumbbell:'دمبل',machine:'دستگاه',cable:'کابل','body only':'وزن بدن',kettlebells:'کتل‌بل',bands:'کش','e-z curl bar':'هالتر ز'}};
+const WD={de:['Mo','Di','Mi','Do','Fr','Sa','So'],fa:['د','س','چ','پ','ج','ش','ی']};
+const GI={mass:'Barbell_Bench_Press_-_Medium_Grip',str:'Barbell_Deadlift',body:'Dumbbell_Flyes',cut:'Mountain_Climbers',fit:'Pushups'},GE={mass:'💪',str:'🏋️',body:'🦾',cut:'🔥',fit:'🧘'};
+// [category, icon, goals, [name de, fa], [dose de, fa], [note de, fa]]
+const SU=[
+['prot','🥛','mass,body,str,cut',['Whey-Protein','پروتئین وی'],['20–40 g pro Portion','۲۰ تا ۴۰ گرم در هر وعده'],['Ergänzt die Tagesmenge. Echtes Essen hat Vorrang. Bei Laktoseproblemen Isolat wählen.','فقط برای تکمیل پروتئین روزانه. غذای واقعی اولویت دارد. برای حساسیت به لاکتوز نوع ایزوله بهتر است.']],
+['prot','🌙','mass,body,cut',['Casein','کازئین'],['30–40 g vor dem Schlafen','۳۰ تا ۴۰ گرم قبل خواب'],['Langsam verdaulich, sättigt lange.','دیرهضم است و مدت طولانی سیری می‌دهد.']],
+['prot','🌱','mass,body,fit',['Pflanzliches Protein (Erbse, Soja)','پروتئین گیاهی (نخود، سویا)'],['20–40 g pro Portion','۲۰ تا ۴۰ گرم در هر وعده'],['Gute Alternative bei veganer Ernährung oder Laktoseintoleranz.','جایگزین خوب برای گیاهخواران یا حساسیت به لاکتوز.']],
+['prot','🍚','mass',['Weight Gainer','گینر'],['1 Portion zwischen den Mahlzeiten','یک سروینگ بین وعده‌ها'],['Nur für Leichtgewichte, die mit Essen ihre Kalorien nicht erreichen. Sonst setzt man leicht Fett an.','فقط برای افراد لاغری که با غذا به کالری هدف نمی‌رسند. وگرنه راحت چربی اضافه می‌شود.']],
+['prot','🍽️','mass,body,str',['Aminosäuren (EAA)','آمینواسید ضروری (EAA)'],['ca. 10 g um das Training','حدود ۱۰ گرم دور تمرین'],['Nützlich bei wenig Protein im Essen. Bei genug Protein kaum Zusatznutzen.','وقتی پروتئین غذایی کم است مفید است. با پروتئین کافی فایده‌ی اضافه‌ی کمی دارد.']],
+['perf','⚡','mass,body,str,fit',['Kreatin Monohydrat','کراتین مونوهیدرات'],['3–5 g täglich','۳ تا ۵ گرم هر روز'],['Am besten untersucht. Viel Wasser trinken. Bei Nierenerkrankung vorher Arzt fragen.','بیشترین پشتوانه علمی را دارد. آب کافی بنوش. با بیماری کلیه اول با پزشک مشورت کن.']],
+['perf','☕','str,cut,mass,body',['Koffein','کافئین'],['ca. 3 mg pro kg, 30 min vor dem Training','حدود ۳ میلی‌گرم به ازای هر کیلو، ۳۰ دقیقه قبل تمرین'],['Maximal etwa 400 mg am Tag. Nicht am späten Abend.','حداکثر حدود ۴۰۰ میلی‌گرم در روز. نزدیک شب نخور.']],
+['perf','🍉','mass,body,str',['Citrullin-Malat','سیترولین مالات'],['6–8 g, 30–60 min vor dem Training','۶ تا ۸ گرم، ۳۰ تا ۶۰ دقیقه قبل تمرین'],['Kann Pump und Ausdauer im Satz verbessern.','ممکن است پمپ و استقامت در ست را بهتر کند.']],
+['perf','🔥','body,cut,fit',['Beta-Alanin','بتا آلانین'],['3–6 g täglich, aufgeteilt','۳ تا ۶ گرم در روز، تقسیم‌شده'],['Kribbeln auf der Haut ist normal. Hilft bei Sätzen von 1–4 Minuten.','سوزن‌سوزن شدن پوست عادی است. برای ست‌های ۱ تا ۴ دقیقه‌ای مفید است.']],
+['perf','🧪','str,mass',['Betain','بتائین'],['ca. 2,5 g täglich','حدود ۲٫۵ گرم در روز'],['Evidenz ist gemischt. Optional.','شواهد علمی متناقض است. اختیاری.']],
+['perf','🍌','fit,cut',['Kohlenhydrate / Energiegel','کربوهیدرات / ژل انرژی'],['30–60 g pro Stunde bei langem Training','۳۰ تا ۶۰ گرم در ساعت در تمرین طولانی'],['Nur bei langen Einheiten über 60–90 Minuten nötig.','فقط برای تمرین‌های بیش از ۶۰ تا ۹۰ دقیقه لازم است.']],
+['perf','💧','cut,fit,mass',['Elektrolyte','الکترولیت'],['Nach Bedarf, bei starkem Schwitzen','در صورت نیاز، هنگام تعریق زیاد'],['Natrium, Kalium, Magnesium. Bei Bluthochdruck Arzt fragen.','سدیم، پتاسیم، منیزیم. با فشار خون بالا از پزشک بپرس.']],
+['vit','☀️','mass,str,body,cut,fit',['Vitamin D3','ویتامین D3'],['800–2000 IE täglich','۸۰۰ تا ۲۰۰۰ واحد در روز'],['Besonders im Winter. Am besten nach Bluttest dosieren.','به‌خصوص در زمستان. بهتر است با آزمایش خون دوز تنظیم شود.']],
+['vit','🦴','mass,str,body,fit',['Calcium','کلسیم'],['Gesamt ca. 1000 mg am Tag, max. 500 mg auf einmal','در مجموع حدود ۱۰۰۰ میلی‌گرم در روز، حداکثر ۵۰۰ در هر بار'],['Zuerst über Milchprodukte oder Gemüse decken. Mit Vitamin D kombinieren.','اول از لبنیات و سبزی تأمین کن. همراه ویتامین D بخور.']],
+['vit','😴','mass,str,body,fit',['Magnesium','منیزیم'],['200–400 mg abends','۲۰۰ تا ۴۰۰ میلی‌گرم شب'],['Kann gegen Krämpfe und für besseren Schlaf helfen.','ممکن است برای گرفتگی عضله و خواب بهتر کمک کند.']],
+['vit','🛡️','mass,str,body,fit',['Zink','روی'],['8–11 mg täglich, nicht dauerhaft über 40 mg','۸ تا ۱۱ میلی‌گرم در روز، بیش از ۴۰ طولانی‌مدت نه'],['Zu viel hemmt die Kupferaufnahme.','مصرف زیاد جذب مس را مختل می‌کند.']],
+['vit','🩸','fit,cut',['Eisen','آهن'],['Nur bei nachgewiesenem Mangel','فقط در صورت کمبود اثبات‌شده'],['Nie auf Verdacht einnehmen. Erst Blutwerte prüfen lassen.','هرگز حدسی مصرف نکن. اول آزمایش خون بده.']],
+['vit','🌿','fit,mass,cut',['Vitamin B12','ویتامین B12'],['Bei veganer Ernährung ca. 250 µg täglich','در رژیم گیاهی حدود ۲۵۰ میکروگرم در روز'],['Fehlt in pflanzlicher Kost fast vollständig.','در غذاهای گیاهی تقریباً وجود ندارد.']],
+['vit','🍊','fit,cut,mass',['Vitamin C','ویتامین C'],['100–200 mg täglich','۱۰۰ تا ۲۰۰ میلی‌گرم در روز'],['Obst und Gemüse reichen meist aus.','معمولاً میوه و سبزی کافی است.']],
+['vit','💊','fit,cut',['Multivitamin','مولتی‌ویتامین'],['1 Tablette täglich zum Essen','روزی یک قرص همراه غذا'],['Sicherheitsnetz bei einseitiger Ernährung, kein Muss.','پوشش ایمنی برای تغذیه‌ی ناکامل، نه ضروری.']],
+['joint','🐟','mass,body,str,cut,fit',['Omega-3 (EPA + DHA)','امگا ۳ (EPA و DHA)'],['1–2 g EPA+DHA täglich','۱ تا ۲ گرم EPA و DHA در روز'],['Hilfreich, wenn du wenig Fisch isst. Gut für Herz und Gelenke.','اگر کم ماهی می‌خوری مفید است. برای قلب و مفاصل خوب است.']],
+['joint','🦵','str,body,mass',['Kollagen + Vitamin C','کلاژن + ویتامین C'],['10–15 g, ca. 1 Std. vor dem Training','۱۰ تا ۱۵ گرم، حدود یک ساعت قبل تمرین'],['Kann Sehnen und Bänder unterstützen. Evidenz noch begrenzt.','ممکن است از تاندون و رباط حمایت کند. شواهد هنوز محدود است.']],
+['joint','🦴','str,body',['Glucosamin / Chondroitin','گلوکزامین / کندروئیتین'],['ca. 1500 mg Glucosamin täglich','حدود ۱۵۰۰ میلی‌گرم گلوکزامین در روز'],['Wirkung unterschiedlich. Bei Schalentier-Allergie Vorsicht.','اثر در افراد متفاوت است. با آلرژی به صدفیات مراقب باش.']],
+['joint','🟡','str,body,mass',['Kurkuma (Curcumin) mit Piperin','زردچوبه (کورکومین) با پیپرین'],['500–1000 mg täglich','۵۰۰ تا ۱۰۰۰ میلی‌گرم در روز'],['Kann Entzündung und Muskelkater mildern. Vorsicht bei Blutverdünnern.','ممکن است التهاب و کوفتگی را کم کند. با داروی رقیق‌کننده خون احتیاط کن.']],
+['joint','🧴','str,body',['MSM','MSM'],['1–3 g täglich','۱ تا ۳ گرم در روز'],['Evidenz begrenzt. Optional.','شواهد محدود است. اختیاری.']],
+['rec','🌙','mass,str,body,cut,fit',['Melatonin','ملاتونین'],['0,5–3 mg, kurz vor dem Schlafen','۰٫۵ تا ۳ میلی‌گرم، کمی قبل خواب'],['Nur kurzfristig, z. B. bei Jetlag. Erst Schlafhygiene verbessern.','فقط کوتاه‌مدت، مثلاً جت‌لگ. اول عادت‌های خواب را درست کن.']],
+['rec','🌾','str,mass,cut',['Ashwagandha','اشواگاندا'],['300–600 mg täglich','۳۰۰ تا ۶۰۰ میلی‌گرم در روز'],['Kann Stress senken. Nicht bei Schwangerschaft oder Schilddrüsenproblemen ohne Arzt.','ممکن است استرس را کم کند. در بارداری یا مشکل تیروئید بدون پزشک نه.']],
+['rec','🥤','mass,body',['Glutamin','گلوتامین'],['ca. 5 g täglich','حدود ۵ گرم در روز'],['Zusatznutzen für Muskelaufbau ist klein.','اثر اضافه برای عضله‌سازی کم است.']],
+['rec','🍒','body,str,mass',['Sauerkirschsaft','عصاره آلبالو'],['ca. 30 ml Konzentrat täglich','حدود ۳۰ میلی‌لیتر کنسانتره در روز'],['Kann Muskelkater leicht verringern.','ممکن است کوفتگی را کمی کم کند.']],
+['fat','🍵','cut',['Grüntee-Extrakt','عصاره چای سبز'],['Wie auf der Packung, nicht auf nüchternen Magen','طبق بسته‌بندی، نه با معده خالی'],['Kleiner Effekt. Hohe Dosen können die Leber belasten.','اثر کوچک. دوز بالا می‌تواند به کبد فشار بیاورد.']],
+['fat','🥬','cut,fit',['Ballaststoffe (Flohsamenschalen)','فیبر (پسیلیوم)'],['5–10 g mit viel Wasser','۵ تا ۱۰ گرم با آب فراوان'],['Hilft beim Sattwerden und für die Verdauung.','به سیری و هضم کمک می‌کند.']],
+['fat','🏃','cut',['L-Carnitin','ال‌کارنیتین'],['ca. 2 g täglich','حدود ۲ گرم در روز'],['Wirkung auf Fettabbau schwach. Kein Wundermittel.','اثر روی چربی‌سوزی ضعیف است. معجزه نیست.']],
+['fat','🦠','cut,fit,mass',['Probiotika','پروبیوتیک'],['Nach Packung, 1× täglich','طبق بسته، روزی یک بار'],['Kann die Verdauung unterstützen. Optional.','می‌تواند به هضم کمک کند. اختیاری.']],
+['med','💊','mass,str,body,cut,fit',['Schmerzmittel (Ibuprofen, Paracetamol)','مسکن (ایبوپروفن، پاراستامول)'],['Nur nach Packungsbeilage, nur bei Bedarf','فقط طبق بروشور و فقط در صورت نیاز'],['Nicht vorbeugend vor dem Training nehmen. Ibuprofen kann Magen und Nieren belasten. Bei anhaltendem Schmerz zum Arzt.','پیشگیرانه قبل تمرین نخور. ایبوپروفن می‌تواند به معده و کلیه فشار بیاورد. اگر درد ادامه دارد پزشک برو.']],
+['med','❤️','mass,str,body,cut,fit',['Dauermedikamente (Blutdruck, Herz, Diabetes, Schilddrüse)','داروهای مصرف دائمی (فشار، قلب، دیابت، تیروئید)'],['Nur nach ärztlicher Anweisung','فقط طبق دستور پزشک'],['Vor Supplements und neuem Training mit Ärztin oder Arzt sprechen. Nie eigenmächtig absetzen.','قبل از مکمل و تمرین جدید با پزشک مشورت کن. هرگز خودسرانه قطع نکن.']],
+['med','⛔','mass,str,body,cut,fit',['Anabolika und Steroide','آنابولیک و استروئید'],['Nicht empfohlen','توصیه نمی‌شود'],['Gefährlich für Herz, Leber und Hormone, in vielen Ländern illegal. Wir geben dazu keine Anleitung.','برای قلب، کبد و هورمون‌ها خطرناک است و در بسیاری از کشورها غیرقانونی. ما دستورالعملی نمی‌دهیم.']],
+['med','⛔','cut',['Fettverbrenner-Pillen (Ephedrin, Clenbuterol, DNP)','قرص‌های چربی‌سوز (افدرین، کلن‌بوترول، DNP)'],['Nicht empfohlen','توصیه نمی‌شود'],['Können lebensgefährlich sein. Besser Ernährung, Schlaf und Training.','می‌توانند کشنده باشند. تغذیه، خواب و تمرین بهتر است.']]];
 const $=s=>document.querySelector(s),L=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},S=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
-const byId=Object.fromEntries(EX.map(e=>[e[0],e]));
-const img=(e,i=0)=>e[5]?`img/${e[0]}/${Math.min(i,e[5]-1)}.jpg`:'';
-const tabs=[['ex','حرکت‌ها'],['plan','برنامه'],['sup','مکمل'],['log','ثبت'],['tm','تایمر']];
-let tab='ex',q='',mf='',ef='',tick;
-function go(t){tab=t;clearInterval(tick);render()}
-function nav(){$('#nav').innerHTML=tabs.map(([k,n])=>`<button class="${k==tab?'on':''}" onclick="go('${k}')">${n}</button>`).join('')}
-function render(){nav();({ex:vEx,plan:vPlan,sup:vSup,log:vLog,tm:vTm})[tab]();scrollTo(0,0)}
-function chips(obj,cur,fn){return `<div class="chips">${['',...Object.keys(obj)].map(k=>`<span class="${k==cur?'on':''}" onclick="${fn}('${k}')">${k?obj[k]:'همه'}</span>`).join('')}</div>`}
-function row(e){return `<div class="ex" onclick="detail('${e[0]}')"><img loading="lazy" src="${img(e)}"><div><b>${e[1]}</b><small>${FA[e[3]]||e[3]} • ${EQ[e[2]]||e[2]}</small></div></div>`}
-function vEx(){
- const f=EX.filter(e=>(!mf||e[3]==mf)&&(!ef||e[2]==ef)&&(!q||e[1].toLowerCase().includes(q.toLowerCase())));
- $('#app').innerHTML=`<h1>کتابخانه حرکت‌ها (${EX.length})</h1><input id="qs" placeholder="جستجو (انگلیسی) مثلاً squat" value="${q}" oninput="q=this.value;list()">${chips(FA,mf,'setM')}${chips(EQ,ef,'setE')}<div id="ls"></div>`;list()}
-function list(){const f=EX.filter(e=>(!mf||e[3]==mf)&&(!ef||e[2]==ef)&&(!q||e[1].toLowerCase().includes(q.toLowerCase())));$('#ls').innerHTML=f.slice(0,60).map(row).join('')+(f.length>60?`<p class="note">${f.length-60} مورد دیگر؛ جستجو را دقیق‌تر کنید.</p>`:f.length?'':'<p>حرکتی پیدا نشد.</p>')}
-function setM(k){mf=k;vEx()}function setE(k){ef=k;vEx()}
-function detail(id){const e=byId[id];let i=0;
- $('#app').innerHTML=`<button class="b g" onclick="vEx()">بازگشت</button><h2 style="direction:ltr;text-align:left">${e[1]}</h2><img class="hero" id="hi" src="${img(e,0)}"><p>${FA[e[3]]||e[3]} • ${EQ[e[2]]||e[2]}</p><h3>آموزش (انگلیسی)</h3><ol>${e[6].map(s=>`<li>${s}</li>`).join('')}</ol>`;
- if(e[5]>1)tick=setInterval(()=>{i=1-i;const h=$('#hi');if(h)h.src=img(e,i)},900)}
-function vPlan(){const p=L('prof',{sex:'m',age:25,w:75,h:175,goal:'mass',lv:1,days:4,where:'gym'});
- $('#app').innerHTML=`<h1>برنامه شخصی</h1><div class="card"><div class="row"><div><label>جنسیت</label><select id="sex"><option value="m">مرد</option><option value="f">زن</option></select></div><div><label>سن</label><input id="age" type="number" value="${p.age}"></div></div><div class="row"><div><label>وزن (کیلو)</label><input id="w" type="number" value="${p.w}"></div><div><label>قد (سانتی‌متر)</label><input id="h" type="number" value="${p.h}"></div></div>
- <label>هدف</label><select id="goal"><option value="mass">حجم</option><option value="cut">چربی‌سوزی</option><option value="str">قدرت</option><option value="fit">تناسب اندام</option></select>
- <div class="row"><div><label>سطح</label><select id="lv"><option value="1">مبتدی</option><option value="2">متوسط</option><option value="3">پیشرفته</option></select></div><div><label>روز تمرین در هفته</label><select id="days"><option>3</option><option>4</option><option>5</option></select></div></div>
- <label>محل تمرین</label><select id="where"><option value="gym">باشگاه</option><option value="home">خانه (دمبل/وزن بدن)</option></select>
- <button class="b" onclick="mkPlan()">ساخت برنامه</button></div><div id="out">${L('plan','')}</div>`;
- for(const k of['sex','goal','lv','days','where'])$('#'+k).value=p[k]}
-function mkPlan(){
- const p={sex:$('#sex').value,age:+$('#age').value,w:+$('#w').value,h:+$('#h').value,goal:$('#goal').value,lv:+$('#lv').value,days:+$('#days').value,where:$('#where').value};S('prof',p);
- const bmi=p.w/((p.h/100)**2),bmr=10*p.w+6.25*p.h-5*p.age+(p.sex=='m'?5:-161),tdee=bmr*(1.2+.05*p.days);
- const kcal=Math.round(tdee+{mass:300,cut:-400,str:150,fit:0}[p.goal]),pro=Math.round(p.w*(p.goal=='cut'?2.2:1.8));
- const rep={mass:'۳-۴ ست × ۸-۱۲',cut:'۳ ست × ۱۲-۱۵',str:'۴-۵ ست × ۳-۶',fit:'۳ ست × ۱۰-۱۵'}[p.goal];
- const sp={3:[['فول‌بادی A',['chest','quadriceps','lats','shoulders','abdominals']],['فول‌بادی B',['hamstrings','chest','middle back','biceps','triceps']],['فول‌بادی C',['quadriceps','shoulders','lats','glutes','abdominals']]],
- 4:[['بالاتنه ۱',['chest','lats','shoulders','biceps','triceps']],['پایین‌تنه ۱',['quadriceps','hamstrings','glutes','calves','abdominals']],['بالاتنه ۲',['shoulders','middle back','chest','triceps','biceps']],['پایین‌تنه ۲',['hamstrings','quadriceps','glutes','calves','abdominals']]],
- 5:[['فشاری',['chest','shoulders','triceps']],['کششی',['lats','middle back','biceps','traps']],['پا',['quadriceps','hamstrings','glutes','calves']],['بالاتنه',['chest','lats','shoulders','abdominals']],['پایین‌تنه',['hamstrings','quadriceps','glutes','abdominals']]]}[p.days];
- const ok=p.where=='gym'?['barbell','dumbbell','machine','cable','body only','e-z curl bar']:['dumbbell','body only','bands','kettlebells'];
- const pr=['barbell','machine','dumbbell','cable','e-z curl bar','kettlebells','bands','body only'];
- const used=new Set();
- const pick=(m,n)=>EX.filter(e=>e[3]==m&&ok.includes(e[2])&&e[5]>0&&(LV[e[4]]||1)<=p.lv&&!used.has(e[0])).sort((a,b)=>pr.indexOf(a[2])-pr.indexOf(b[2])).slice(0,8).sort(()=>Math.random()-.5).slice(0,n).map(e=>(used.add(e[0]),e));
- const html=`<div class="card"><h2>خلاصه بدن شما</h2>BMI: ${bmi.toFixed(1)}<br>کالری روزانه پیشنهادی: ~${kcal}<br>پروتئین روزانه: ~${pro} گرم<br><span class="note">این اعداد تخمینی‌اند (فرمول Mifflin-St Jeor).</span></div>`+
- sp.map(([n,ms],i)=>{const ex=ms.flatMap((m,j)=>pick(m,j<2?2:1));return `<div class="card"><h3>روز ${i+1}: ${n}</h3><span class="note">${rep} • استراحت ۶۰-۹۰ ثانیه</span>${ex.map(row).join('')}</div>`}).join('')+`<p class="note">هر روز هم ۵ دقیقه گرم کردن انجام دهید. اگر بیماری یا آسیب دارید ابتدا با پزشک مشورت کنید.</p>`;
- S('plan',html);$('#out').innerHTML=html}
-function vSup(){const g=L('prof',{}).goal||'mass';
- const A=[['کراتین مونوهیدرات','۳-۵ گرم در روز، هر روز. بیشترین پشتوانه علمی را دارد؛ آب کافی بنوشید.',1],['پروتئین وی','فقط برای تکمیل پروتئین روزانه؛ غذای واقعی اولویت دارد. اگر لاکتوز تحمل نمی‌کنید نوع ایزوله را بررسی کنید.',1],['گینر','فقط برای افراد لاغری که با غذا به کالری هدف نمی‌رسند؛ بدون برنامه می‌تواند چربی اضافه کند.',g=='mass'],['کلسیم و ویتامین D','اگر لبنیات یا آفتاب کم دارید؛ مقدار را با آزمایش و پزشک تنظیم کنید.',1],['امگا ۳','اگر ماهی کم می‌خورید؛ برای مفاصل و قلب مفید است.',1],['کافئین','۳ میلی‌گرم به ازای هر کیلو، ۳۰ دقیقه قبل تمرین؛ نه نزدیک خواب.',g=='cut'||g=='str'],['BCAA / پیش‌تمرین','ضروری نیستند؛ اگر پروتئین کافی بخورید BCAA لازم نیست.',0]];
- $('#app').innerHTML=`<h1>مکمل‌ها</h1><p class="note">مناسب هدف فعلی شما ${g}. مکمل جای غذا و خواب را نمی‌گیرد.</p>`+A.map(a=>`<div class="card"><h3>${a[0]}${a[2]?'':' (اختیاری)'}</h3>${a[1]}</div>`).join('')+`<p class="note">این اطلاعات عمومی است، نه توصیه پزشکی. با بیماری کلیوی، کبدی، بارداری یا مصرف دارو حتماً با پزشک مشورت کنید. مکمل را فقط از منبع معتبر بخرید.</p>`}
-function vLog(){const lg=L('log',[]),ids=[...new Set(lg.map(x=>x.id))];
- $('#app').innerHTML=`<h1>ثبت تمرین</h1><div class="card"><input id="ls2" placeholder="نام حرکت (انگلیسی)" list="dl"><datalist id="dl">${EX.map(e=>`<option value="${e[1]}">`).join('')}</datalist><div class="row"><input id="kg" type="number" placeholder="وزنه (kg)"><input id="rp" type="number" placeholder="تکرار"></div><button class="b" onclick="addLog()">ثبت ست</button></div>
- <h3>روند پیشرفت</h3><select id="cs" onchange="chart()">${ids.map(i=>`<option value="${i}">${byId[i][1]}</option>`).join('')}</select><canvas id="cv" width="600" height="320"></canvas>
- <h3>آخرین ثبت‌ها</h3>${lg.slice(-15).reverse().map(x=>`<div class="card" style="padding:8px"><span style="direction:ltr;display:inline-block">${byId[x.id][1]}</span> — ${x.kg}kg × ${x.rp}<span class="note"> ${x.d}</span></div>`).join('')||'<p class="note">هنوز چیزی ثبت نشده.</p>'}`;chart()}
-function addLog(){const e=EX.find(x=>x[1].toLowerCase()==$('#ls2').value.trim().toLowerCase()),kg=+$('#kg').value,rp=+$('#rp').value;if(!e||!kg||!rp)return alert('حرکت را از لیست انتخاب کنید و وزنه و تکرار را وارد کنید.');const lg=L('log',[]);lg.push({id:e[0],kg,rp,d:new Date().toLocaleDateString('fa-IR')});S('log',lg);vLog()}
-function chart(){const c=$('#cv'),s=$('#cs');if(!c||!s||!s.value)return;const pts=L('log',[]).filter(x=>x.id==s.value).map(x=>x.kg),x=c.getContext('2d');x.clearRect(0,0,600,320);const mx=Math.max(...pts),mn=Math.min(...pts),r=mx-mn||1;x.strokeStyle='#ffb703';x.lineWidth=4;x.fillStyle='#ffb703';x.font='22px sans-serif';x.beginPath();pts.forEach((v,i)=>{const px=30+(pts.length>1?i*540/(pts.length-1):270),py=280-(v-mn)/r*230;i?x.lineTo(px,py):x.moveTo(px,py)});x.stroke();pts.forEach((v,i)=>{const px=30+(pts.length>1?i*540/(pts.length-1):270),py=280-(v-mn)/r*230;x.beginPath();x.arc(px,py,6,0,7);x.fill();if(i==pts.length-1)x.fillText(v+'kg',Math.min(px,520),py-12)})}
-function vTm(){let t=0;$('#app').innerHTML=`<h1>تایمر استراحت</h1><div class="big" id="t">0</div><div class="row">${[60,90,120,180].map(s=>`<button class="b" onclick="st(${s})">${s} ثانیه</button>`).join('')}</div><button class="b g" onclick="st(0)">توقف</button>`;
- window.st=s=>{clearInterval(tick);t=s;$('#t').textContent=t;if(!s)return;tick=setInterval(()=>{t--;$('#t').textContent=t;if(t<=0){clearInterval(tick);$('#t').textContent='شروع!';navigator.vibrate&&navigator.vibrate([300,100,300])}},1000)}}
+const byId=Object.fromEntries(EX.map(e=>[e[0],e])),LV={beginner:1,intermediate:2,expert:3};
+let C=L('cfg',null),lang=(C&&C.lang)||L('lang','de'),st=0,P=L('draft',{sex:'m',age:25,w:75,h:175,goal:'mass',lv:1,where:'gym',days:[0,2,4]}),tab='cal',sel=new Date(),vm=new Date(),cat='',C0;
+const t=k=>T[lang][k],fd=n=>lang=='fa'?(+n).toLocaleString('fa-IR',{useGrouping:false}):n,fi=lang=>lang=='fa'?1:0;
+const im=(e,i=0)=>e[5]?`img/${e[0]}/${Math.min(i,e[5]-1)}.jpg`:'';
+const dk=d=>`${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`,wk=d=>(d.getDay()+6)%7;
+function setLang(l){lang=l;S('lang',l);if(C){C.lang=l;S('cfg',C)}render()}
+function rd(){if($('#age')){P.age=+$('#age').value||25;P.w=+$('#w').value||70;P.h=+$('#h').value||170}S('draft',P)}
+function setP(k,v){rd();P[k]=typeof P[k]=='number'?+v:v;S('draft',P);render()}
+function pills(arr,cur,fn){return `<div class="pills">${arr.map(([v,n])=>`<span class="${v==cur?'on':''}" onclick="${fn.replace('$v',v)}">${n}</span>`).join('')}</div>`}
+function render(){document.documentElement.dir=lang=='fa'?'rtl':'ltr';document.documentElement.lang=lang;
+ if(!C){$('#nav').innerHTML='';return onboard()}
+ $('#nav').innerHTML=[['cal','📅',t('cal')],['sup','💊',t('sup')],['me','👤',t('me')]].map(([k,i,n])=>`<button class="${k==tab?'on':''}" onclick="tab='${k}';render()"><b>${i}</b>${n}</button>`).join('');
+ ({cal:vCal,sup:vSup,me:vMe})[tab]();scrollTo(0,0)}
+function exRow(e,chk){return `<div class="ex"><img loading="lazy" src="${im(e)}" onclick="detail('${e[0]}')"><div class="t" onclick="detail('${e[0]}')"><b>${e[1]}</b><small>${MU[lang][e[3]]||e[3]} · ${EQ[lang][e[2]]||e[2]}</small></div>${chk||''}</div>`}
+// ---------- Onboarding
+function onboard(){let h='';
+ const nav=(js,label)=>`<div class="row">${st?`<button class="b g" onclick="rd();st--;render()">${t('back')}</button>`:''}<button class="b" onclick="${js||'rd();st++;render()'}">${label||t('next')}</button></div>`;
+ const LG=[['de','Deutsch'],['fa','فارسی']];
+ if(st==0)h=`<h1>🏋️ ${t('hi')}</h1><label>🌐 ${t('lang')}</label>${pills(LG,lang,"setLang('$v')")}`+nav();
+ if(st==1)h=`<h1>👤 ${t('s1')}</h1><label>${t('sex')}</label>${pills([['m','🙋‍♂️ '+t('m')],['f','🙋‍♀️ '+t('f')]],P.sex,"setP('sex','$v')")}<label>🎂 ${t('age')}</label><input id="age" type="number" value="${P.age}"><div class="row"><div><label>⚖️ ${t('w')}</label><input id="w" type="number" value="${P.w}"></div><div><label>📏 ${t('h')}</label><input id="h" type="number" value="${P.h}"></div></div>`+nav();
+ if(st==2)h=`<h1>🎯 ${t('s3')}</h1>`+Object.keys(GI).map(g=>{const e=byId[GI[g]];return `<div class="goal ${P.goal==g?'on':''}" onclick="setP('goal','${g}')"><div class="im"><img src="${im(e,0)}"><img src="${im(e,1)}"></div><div><b>${GE[g]} ${t('goalname')[g]}</b><small>${t('gd')[g]}</small></div></div>`}).join('')+nav();
+ if(st==3)h=`<h1>📈 ${t('s4')}</h1>${pills([[1,'🌱 '+t('l1')],[2,'🌿 '+t('l2')],[3,'🌳 '+t('l3')]],P.lv,"setP('lv',$v)")}<label>📍 ${t('where')}</label>${pills([['gym','🏟️ '+t('gym')],['home','🏠 '+t('home')]],P.where,"setP('where','$v')")}`+nav();
+ if(st==4)h=`<h1>🗓️ ${t('s5')}</h1><div class="pills">${WD[lang].map((n,i)=>`<span class="${P.days.includes(i)?'on':''}" onclick="tgl(${i})">${n}</span>`).join('')}</div><p class="note">${t('dh')}</p>`+nav(P.days.length?'st=5;render()':'void 0','🤖 '+t('build'));
+ if(st==5)return coach();
+ $('#app').innerHTML=h}
+function tgl(i){const a=P.days;a.includes(i)?a.splice(a.indexOf(i),1):a.push(i);a.sort();S('draft',P);render()}
+// ---------- Plan builder (rule-based coach, works offline)
+function build(){const p=P,n=p.days.length,g=p.goal;
+ const SPL={1:[['full',['chest','quadriceps','lats','shoulders','abdominals','hamstrings']]],2:[['a',['chest','quadriceps','lats','shoulders','abdominals']],['b',['hamstrings','chest','middle back','biceps','triceps']]],
+ 3:[['a',['chest','quadriceps','lats','shoulders','abdominals']],['b',['hamstrings','chest','middle back','biceps','triceps']],['c',['quadriceps','shoulders','lats','glutes','abdominals']]],
+ 4:[['up1',['chest','lats','shoulders','biceps','triceps']],['lo1',['quadriceps','hamstrings','glutes','calves','abdominals']],['up2',['shoulders','middle back','chest','triceps','biceps']],['lo2',['hamstrings','quadriceps','glutes','calves','abdominals']]],
+ 5:[['push',['chest','shoulders','triceps']],['pull',['lats','middle back','biceps','traps']],['legs',['quadriceps','hamstrings','glutes','calves']],['up',['chest','lats','shoulders','abdominals']],['lo',['hamstrings','quadriceps','glutes','abdominals']]]};
+ SPL[6]=[...SPL[5].slice(0,3),['push',SPL[5][0][1]],['pull',SPL[5][1][1]],['legs',SPL[5][2][1]]];SPL[7]=[...SPL[6],['full',SPL[1][0][1]]];
+ const ok=p.where=='gym'?['barbell','dumbbell','machine','cable','body only','e-z curl bar']:['dumbbell','body only','bands','kettlebells'],pr=['barbell','machine','dumbbell','cable','e-z curl bar','kettlebells','bands','body only'],used=new Set();
+ const pick=(m,k)=>EX.filter(e=>e[3]==m&&ok.includes(e[2])&&e[5]>0&&(LV[e[4]]||1)<=p.lv&&!used.has(e[0])).sort((a,b)=>pr.indexOf(a[2])-pr.indexOf(b[2])).slice(0,8).sort(()=>Math.random()-.5).slice(0,k).map(e=>(used.add(e[0]),e[0]));
+ const plan=SPL[n].map(([k,ms])=>({k,ex:ms.flatMap((m,j)=>pick(m,(j<2?2:1)+(g=='body'&&j<3?1:0)))}));
+ const bmi=p.w/((p.h/100)**2),bmr=10*p.w+6.25*p.h-5*p.age+(p.sex=='m'?5:-161),tdee=bmr*(1.2+.05*n);
+ return {lang,p:{...p},plan,days:[...p.days],bmi:bmi.toFixed(1),kcal:Math.round(tdee+{mass:300,str:150,body:250,cut:-400,fit:0}[g]),pro:Math.round(p.w*(g=='cut'?2.2:1.8)),done:{}}}
+function coach(){C0=build();const n=C0;$('#app').innerHTML=`<div class="ld"><h1>🤖 Coach</h1>${['c1','c2','c3'].map((k,i)=>`<p style="animation-delay:${i*.9}s">⏳ ${t(k)}</p>`).join('')}<p style="animation-delay:2.8s">✅ ${t('c4')}</p><div class="card" style="opacity:0;animation:f .5s 3.2s forwards">${GE[n.p.goal]} ${t('goalname')[n.p.goal]}: ${t('reptxt')[n.p.goal]}<br>${t('bmi')}: ${fd(n.bmi)} · ${t('kcal')}: ${fd(n.kcal)} · ${t('prot')}: ${fd(n.pro)} g</div><button class="b" style="opacity:0;animation:f .5s 3.4s forwards" onclick="fin()">${t('start')}</button></div>`}
+function fin(){C=C0;C.lang=lang;S('cfg',C);tab='cal';sel=new Date();vm=new Date();render()}
+// ---------- Calendar (home)
+function dayPlan(d){const i=C.days.indexOf(wk(d));return i<0?null:C.plan[i]}
+function vCal(){const y=vm.getFullYear(),m=vm.getMonth(),off=wk(new Date(y,m,1)),nd=new Date(y,m+1,0).getDate(),td=dk(new Date()),sk=dk(sel),loc=lang=='fa'?'fa-IR-u-ca-gregory':'de-DE';
+ let cells=WD[lang].map(w=>`<i>${w}</i>`).join('')+'<span></span>'.repeat(off);
+ for(let d=1;d<=nd;d++){const dt=new Date(y,m,d),k=dk(dt),pl=dayPlan(dt),dn=(C.done[k]||[]).length;
+  cells+=`<div class="${pl?'p':''} ${dn?'d':''} ${k==td?'t':''} ${k==sk?'s':''}" onclick="sel=new Date(${y},${m},${d});vCal()">${fd(d)}${dn?`<u>✔ ${fd(dn)}</u>`:pl?'<u>💪</u>':''}</div>`}
+ const pl=dayPlan(sel),k=dk(sel),dn=C.done[k]||[];
+ let body=`<div class="card">😴 ${t('rest')}</div>`;
+ if(pl)body=`<h3>💪 ${t('sp')[pl.k]} <span class="note">${t('reps')}: ${t('reptxt')[C.p.goal]}</span></h3>`+pl.ex.map(id=>exRow(byId[id],`<button class="ck ${dn.includes(id)?'on':''}" onclick="chk('${id}')">${dn.includes(id)?'✔':''}</button>`)).join('');
+ $('#app').innerHTML=`<div class="hd"><button onclick="vm=new Date(${y},${m-1},1);vCal()">${lang=='fa'?'›':'‹'}</button><h2>📅 ${vm.toLocaleDateString(loc,{month:'long',year:'numeric'})}</h2><button onclick="vm=new Date(${y},${m+1},1);vCal()">${lang=='fa'?'‹':'›'}</button></div><div class="cal">${cells}</div><h2>${sel.toLocaleDateString(loc,{weekday:'long',day:'numeric',month:'long'})}</h2>${body}`}
+function chk(id){const k=dk(sel),a=C.done[k]||(C.done[k]=[]);a.includes(id)?a.splice(a.indexOf(id),1):a.push(id);if(!a.length)delete C.done[k];S('cfg',C);vCal()}
+function detail(id){const e=byId[id];$('#app').innerHTML=`<button class="b g" onclick="render()">${t('back')}</button><h2 style="direction:ltr;text-align:start">${e[1]}</h2><div class="row" style="gap:4px"><img class="hero" src="${im(e,0)}"><img class="hero" src="${im(e,1)}"></div><p>${MU[lang][e[3]]||e[3]} · ${EQ[lang][e[2]]||e[2]}</p>`}
+// ---------- Supplements
+function vSup(){const g=C.p.goal,cs=T[lang].cats,i=fi(lang);
+ $('#app').innerHTML=`<h1>💊 ${t('sup')}</h1><p class="note">${t('warn')}</p><div class="pills"><span class="${cat==''?'on':''}" onclick="cat='';vSup()">${t('all')}</span>${Object.keys(cs).map(k=>`<span class="${cat==k?'on':''}" onclick="cat='${k}';vSup()">${cs[k]}</span>`).join('')}</div>`+
+ SU.filter(s=>!cat||s[0]==cat).map(s=>`<div class="card"><h3>${s[1]} ${s[3][i]} ${s[2].split(',').includes(g)?`<span class="tag">⭐ ${t('rec')}</span>`:''}</h3><b>${s[4][i]}</b><br>${s[5][i]}</div>`).join('')}
+// ---------- Profile
+function vMe(){const p=C.p;$('#app').innerHTML=`<h1>👤 ${t('me')}</h1><div class="card"><h3>${GE[p.goal]} ${t('goalname')[p.goal]}</h3>${t('reps')}: ${t('reptxt')[p.goal]}<br>⚖️ ${fd(p.w)} kg · 📏 ${fd(p.h)} cm · 🎂 ${fd(p.age)}<br>🔢 ${t('bmi')}: ${fd(C.bmi)}<br>🔥 ${t('kcal')}: ${fd(C.kcal)}<br>🥩 ${t('prot')}: ${fd(C.pro)} g<br>🗓️ ${t('days')}: ${C.days.map(i=>WD[lang][i]).join(' · ')}</div><label>🌐 ${t('lang')}</label>${pills([['de','Deutsch'],['fa','فارسی']],lang,"setLang('$v')")}<button class="b g" onclick="redo()">🔄 ${t('redo')}</button>`}
+function redo(){if(!confirm(t('redo')+'?'))return;S('cfg',null);C=null;st=1;P=L('draft',P);render()}
 render();
 </script></body></html>
