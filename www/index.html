@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>باشگاه من</title>
+<style>
+:root{--bg:#101826;--s:#19243a;--s2:#223150;--ac:#ffb703;--tx:#eef2f7;--mu:#8fa0ba;--ok:#5fd0a0}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.7 Tahoma,"Segoe UI",sans-serif;padding:env(safe-area-inset-top) 0 calc(64px + env(safe-area-inset-bottom))}
+h1,h2,h3{margin:.4em 0}h1{font-size:22px}h2{font-size:18px}h3{font-size:16px;color:var(--ac)}
+main{padding:12px 14px;max-width:640px;margin:auto}
+nav{position:fixed;bottom:0;inset-inline:0;display:flex;background:var(--s);padding-bottom:env(safe-area-inset-bottom);border-top:1px solid var(--s2)}
+nav button{flex:1;background:none;border:0;color:var(--mu);padding:10px 2px;font:inherit;font-size:12px}
+nav button.on{color:var(--ac);font-weight:700}
+input,select,button.b{font:inherit;color:var(--tx);background:var(--s);border:1px solid var(--s2);border-radius:10px;padding:10px;width:100%}
+button.b{background:var(--ac);color:#101826;font-weight:700;border:0;margin-top:8px}
+button.g{background:var(--s2);color:var(--tx)}
+.row{display:flex;gap:8px}.row>*{flex:1}
+label{display:block;font-size:13px;color:var(--mu);margin:8px 0 2px}
+.card{background:var(--s);border-radius:14px;padding:12px;margin:10px 0}
+.ex{display:flex;gap:10px;align-items:center;background:var(--s);border-radius:12px;padding:8px;margin:8px 0}
+.ex img{width:64px;height:64px;border-radius:8px;object-fit:cover;background:var(--s2)}
+.ex b{display:block;direction:ltr;text-align:left;font-size:14px}.ex small{color:var(--mu)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:4px 0}
+.chips span{white-space:nowrap;background:var(--s);padding:4px 12px;border-radius:99px;font-size:13px}
+.chips span.on{background:var(--ac);color:#101826}
+.hero{width:100%;aspect-ratio:1;object-fit:contain;background:#fff;border-radius:12px}
+.big{font-size:44px;text-align:center;color:var(--ac);font-variant-numeric:tabular-nums}
+.note{font-size:12px;color:var(--mu)}
+ol{padding-inline-start:20px;direction:ltr;text-align:left;font-size:14px}
+canvas{width:100%;height:160px}
+</style></head><body><main id="app"></main>
+<nav id="nav"></nav>
+<script src="data.js"></script>
+<script>
+const FA={chest:'سینه',shoulders:'سرشانه',biceps:'جلو بازو',triceps:'پشت بازو',lats:'زیربغل',quadriceps:'جلو ران',hamstrings:'پشت ران',glutes:'باسن',calves:'ساق',abdominals:'شکم','middle back':'وسط کمر','lower back':'پایین کمر',forearms:'ساعد',traps:'تراپز',neck:'گردن',adductors:'داخل ران',abductors:'خارج ران'};
+const EQ={barbell:'هالتر',dumbbell:'دمبل',machine:'دستگاه',cable:'کابل','body only':'وزن بدن',kettlebells:'کتل‌بل',bands:'کش','e-z curl bar':'هالتر ز','medicine ball':'توپ مدیسین','exercise ball':'توپ ورزش','foam roll':'فوم رولر',other:'سایر'};
+const LV={beginner:1,intermediate:2,expert:3};
+const $=s=>document.querySelector(s),L=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},S=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const byId=Object.fromEntries(EX.map(e=>[e[0],e]));
+const img=(e,i=0)=>e[5]?`img/${e[0]}/${Math.min(i,e[5]-1)}.jpg`:'';
+const tabs=[['ex','حرکت‌ها'],['plan','برنامه'],['sup','مکمل'],['log','ثبت'],['tm','تایمر']];
+let tab='ex',q='',mf='',ef='',tick;
+function go(t){tab=t;clearInterval(tick);render()}
+function nav(){$('#nav').innerHTML=tabs.map(([k,n])=>`<button class="${k==tab?'on':''}" onclick="go('${k}')">${n}</button>`).join('')}
+function render(){nav();({ex:vEx,plan:vPlan,sup:vSup,log:vLog,tm:vTm})[tab]();scrollTo(0,0)}
+function chips(obj,cur,fn){return `<div class="chips">${['',...Object.keys(obj)].map(k=>`<span class="${k==cur?'on':''}" onclick="${fn}('${k}')">${k?obj[k]:'همه'}</span>`).join('')}</div>`}
+function row(e){return `<div class="ex" onclick="detail('${e[0]}')"><img loading="lazy" src="${img(e)}"><div><b>${e[1]}</b><small>${FA[e[3]]||e[3]} • ${EQ[e[2]]||e[2]}</small></div></div>`}
+function vEx(){
+ const f=EX.filter(e=>(!mf||e[3]==mf)&&(!ef||e[2]==ef)&&(!q||e[1].toLowerCase().includes(q.toLowerCase())));
+ $('#app').innerHTML=`<h1>کتابخانه حرکت‌ها (${EX.length})</h1><input id="qs" placeholder="جستجو (انگلیسی) مثلاً squat" value="${q}" oninput="q=this.value;list()">${chips(FA,mf,'setM')}${chips(EQ,ef,'setE')}<div id="ls"></div>`;list()}
+function list(){const f=EX.filter(e=>(!mf||e[3]==mf)&&(!ef||e[2]==ef)&&(!q||e[1].toLowerCase().includes(q.toLowerCase())));$('#ls').innerHTML=f.slice(0,60).map(row).join('')+(f.length>60?`<p class="note">${f.length-60} مورد دیگر؛ جستجو را دقیق‌تر کنید.</p>`:f.length?'':'<p>حرکتی پیدا نشد.</p>')}
+function setM(k){mf=k;vEx()}function setE(k){ef=k;vEx()}
+function detail(id){const e=byId[id];let i=0;
+ $('#app').innerHTML=`<button class="b g" onclick="vEx()">بازگشت</button><h2 style="direction:ltr;text-align:left">${e[1]}</h2><img class="hero" id="hi" src="${img(e,0)}"><p>${FA[e[3]]||e[3]} • ${EQ[e[2]]||e[2]}</p><h3>آموزش (انگلیسی)</h3><ol>${e[6].map(s=>`<li>${s}</li>`).join('')}</ol>`;
+ if(e[5]>1)tick=setInterval(()=>{i=1-i;const h=$('#hi');if(h)h.src=img(e,i)},900)}
+function vPlan(){const p=L('prof',{sex:'m',age:25,w:75,h:175,goal:'mass',lv:1,days:4,where:'gym'});
+ $('#app').innerHTML=`<h1>برنامه شخصی</h1><div class="card"><div class="row"><div><label>جنسیت</label><select id="sex"><option value="m">مرد</option><option value="f">زن</option></select></div><div><label>سن</label><input id="age" type="number" value="${p.age}"></div></div><div class="row"><div><label>وزن (کیلو)</label><input id="w" type="number" value="${p.w}"></div><div><label>قد (سانتی‌متر)</label><input id="h" type="number" value="${p.h}"></div></div>
+ <label>هدف</label><select id="goal"><option value="mass">حجم</option><option value="cut">چربی‌سوزی</option><option value="str">قدرت</option><option value="fit">تناسب اندام</option></select>
+ <div class="row"><div><label>سطح</label><select id="lv"><option value="1">مبتدی</option><option value="2">متوسط</option><option value="3">پیشرفته</option></select></div><div><label>روز تمرین در هفته</label><select id="days"><option>3</option><option>4</option><option>5</option></select></div></div>
+ <label>محل تمرین</label><select id="where"><option value="gym">باشگاه</option><option value="home">خانه (دمبل/وزن بدن)</option></select>
+ <button class="b" onclick="mkPlan()">ساخت برنامه</button></div><div id="out">${L('plan','')}</div>`;
+ for(const k of['sex','goal','lv','days','where'])$('#'+k).value=p[k]}
+function mkPlan(){
+ const p={sex:$('#sex').value,age:+$('#age').value,w:+$('#w').value,h:+$('#h').value,goal:$('#goal').value,lv:+$('#lv').value,days:+$('#days').value,where:$('#where').value};S('prof',p);
+ const bmi=p.w/((p.h/100)**2),bmr=10*p.w+6.25*p.h-5*p.age+(p.sex=='m'?5:-161),tdee=bmr*(1.2+.05*p.days);
+ const kcal=Math.round(tdee+{mass:300,cut:-400,str:150,fit:0}[p.goal]),pro=Math.round(p.w*(p.goal=='cut'?2.2:1.8));
+ const rep={mass:'۳-۴ ست × ۸-۱۲',cut:'۳ ست × ۱۲-۱۵',str:'۴-۵ ست × ۳-۶',fit:'۳ ست × ۱۰-۱۵'}[p.goal];
+ const sp={3:[['فول‌بادی A',['chest','quadriceps','lats','shoulders','abdominals']],['فول‌بادی B',['hamstrings','chest','middle back','biceps','triceps']],['فول‌بادی C',['quadriceps','shoulders','lats','glutes','abdominals']]],
+ 4:[['بالاتنه ۱',['chest','lats','shoulders','biceps','triceps']],['پایین‌تنه ۱',['quadriceps','hamstrings','glutes','calves','abdominals']],['بالاتنه ۲',['shoulders','middle back','chest','triceps','biceps']],['پایین‌تنه ۲',['hamstrings','quadriceps','glutes','calves','abdominals']]],
+ 5:[['فشاری',['chest','shoulders','triceps']],['کششی',['lats','middle back','biceps','traps']],['پا',['quadriceps','hamstrings','glutes','calves']],['بالاتنه',['chest','lats','shoulders','abdominals']],['پایین‌تنه',['hamstrings','quadriceps','glutes','abdominals']]]}[p.days];
+ const ok=p.where=='gym'?['barbell','dumbbell','machine','cable','body only','e-z curl bar']:['dumbbell','body only','bands','kettlebells'];
+ const pr=['barbell','machine','dumbbell','cable','e-z curl bar','kettlebells','bands','body only'];
+ const used=new Set();
+ const pick=(m,n)=>EX.filter(e=>e[3]==m&&ok.includes(e[2])&&e[5]>0&&(LV[e[4]]||1)<=p.lv&&!used.has(e[0])).sort((a,b)=>pr.indexOf(a[2])-pr.indexOf(b[2])).slice(0,8).sort(()=>Math.random()-.5).slice(0,n).map(e=>(used.add(e[0]),e));
+ const html=`<div class="card"><h2>خلاصه بدن شما</h2>BMI: ${bmi.toFixed(1)}<br>کالری روزانه پیشنهادی: ~${kcal}<br>پروتئین روزانه: ~${pro} گرم<br><span class="note">این اعداد تخمینی‌اند (فرمول Mifflin-St Jeor).</span></div>`+
+ sp.map(([n,ms],i)=>{const ex=ms.flatMap((m,j)=>pick(m,j<2?2:1));return `<div class="card"><h3>روز ${i+1}: ${n}</h3><span class="note">${rep} • استراحت ۶۰-۹۰ ثانیه</span>${ex.map(row).join('')}</div>`}).join('')+`<p class="note">هر روز هم ۵ دقیقه گرم کردن انجام دهید. اگر بیماری یا آسیب دارید ابتدا با پزشک مشورت کنید.</p>`;
+ S('plan',html);$('#out').innerHTML=html}
+function vSup(){const g=L('prof',{}).goal||'mass';
+ const A=[['کراتین مونوهیدرات','۳-۵ گرم در روز، هر روز. بیشترین پشتوانه علمی را دارد؛ آب کافی بنوشید.',1],['پروتئین وی','فقط برای تکمیل پروتئین روزانه؛ غذای واقعی اولویت دارد. اگر لاکتوز تحمل نمی‌کنید نوع ایزوله را بررسی کنید.',1],['گینر','فقط برای افراد لاغری که با غذا به کالری هدف نمی‌رسند؛ بدون برنامه می‌تواند چربی اضافه کند.',g=='mass'],['کلسیم و ویتامین D','اگر لبنیات یا آفتاب کم دارید؛ مقدار را با آزمایش و پزشک تنظیم کنید.',1],['امگا ۳','اگر ماهی کم می‌خورید؛ برای مفاصل و قلب مفید است.',1],['کافئین','۳ میلی‌گرم به ازای هر کیلو، ۳۰ دقیقه قبل تمرین؛ نه نزدیک خواب.',g=='cut'||g=='str'],['BCAA / پیش‌تمرین','ضروری نیستند؛ اگر پروتئین کافی بخورید BCAA لازم نیست.',0]];
+ $('#app').innerHTML=`<h1>مکمل‌ها</h1><p class="note">مناسب هدف فعلی شما ${g}. مکمل جای غذا و خواب را نمی‌گیرد.</p>`+A.map(a=>`<div class="card"><h3>${a[0]}${a[2]?'':' (اختیاری)'}</h3>${a[1]}</div>`).join('')+`<p class="note">این اطلاعات عمومی است، نه توصیه پزشکی. با بیماری کلیوی، کبدی، بارداری یا مصرف دارو حتماً با پزشک مشورت کنید. مکمل را فقط از منبع معتبر بخرید.</p>`}
+function vLog(){const lg=L('log',[]),ids=[...new Set(lg.map(x=>x.id))];
+ $('#app').innerHTML=`<h1>ثبت تمرین</h1><div class="card"><input id="ls2" placeholder="نام حرکت (انگلیسی)" list="dl"><datalist id="dl">${EX.map(e=>`<option value="${e[1]}">`).join('')}</datalist><div class="row"><input id="kg" type="number" placeholder="وزنه (kg)"><input id="rp" type="number" placeholder="تکرار"></div><button class="b" onclick="addLog()">ثبت ست</button></div>
+ <h3>روند پیشرفت</h3><select id="cs" onchange="chart()">${ids.map(i=>`<option value="${i}">${byId[i][1]}</option>`).join('')}</select><canvas id="cv" width="600" height="320"></canvas>
+ <h3>آخرین ثبت‌ها</h3>${lg.slice(-15).reverse().map(x=>`<div class="card" style="padding:8px"><span style="direction:ltr;display:inline-block">${byId[x.id][1]}</span> — ${x.kg}kg × ${x.rp}<span class="note"> ${x.d}</span></div>`).join('')||'<p class="note">هنوز چیزی ثبت نشده.</p>'}`;chart()}
+function addLog(){const e=EX.find(x=>x[1].toLowerCase()==$('#ls2').value.trim().toLowerCase()),kg=+$('#kg').value,rp=+$('#rp').value;if(!e||!kg||!rp)return alert('حرکت را از لیست انتخاب کنید و وزنه و تکرار را وارد کنید.');const lg=L('log',[]);lg.push({id:e[0],kg,rp,d:new Date().toLocaleDateString('fa-IR')});S('log',lg);vLog()}
+function chart(){const c=$('#cv'),s=$('#cs');if(!c||!s||!s.value)return;const pts=L('log',[]).filter(x=>x.id==s.value).map(x=>x.kg),x=c.getContext('2d');x.clearRect(0,0,600,320);const mx=Math.max(...pts),mn=Math.min(...pts),r=mx-mn||1;x.strokeStyle='#ffb703';x.lineWidth=4;x.fillStyle='#ffb703';x.font='22px sans-serif';x.beginPath();pts.forEach((v,i)=>{const px=30+(pts.length>1?i*540/(pts.length-1):270),py=280-(v-mn)/r*230;i?x.lineTo(px,py):x.moveTo(px,py)});x.stroke();pts.forEach((v,i)=>{const px=30+(pts.length>1?i*540/(pts.length-1):270),py=280-(v-mn)/r*230;x.beginPath();x.arc(px,py,6,0,7);x.fill();if(i==pts.length-1)x.fillText(v+'kg',Math.min(px,520),py-12)})}
+function vTm(){let t=0;$('#app').innerHTML=`<h1>تایمر استراحت</h1><div class="big" id="t">0</div><div class="row">${[60,90,120,180].map(s=>`<button class="b" onclick="st(${s})">${s} ثانیه</button>`).join('')}</div><button class="b g" onclick="st(0)">توقف</button>`;
+ window.st=s=>{clearInterval(tick);t=s;$('#t').textContent=t;if(!s)return;tick=setInterval(()=>{t--;$('#t').textContent=t;if(t<=0){clearInterval(tick);$('#t').textContent='شروع!';navigator.vibrate&&navigator.vibrate([300,100,300])}},1000)}}
+render();
+</script></body></html>
